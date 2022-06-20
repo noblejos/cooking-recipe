@@ -1,0 +1,26 @@
+import { useHistory, useLocation } from "react-router-dom"
+import RecipeList from "../../componets/RecipeList"
+import { useFetch } from "../../hooks/useFetch"
+import "./Search.css"
+
+
+export default function Search() {
+const queryString = useLocation().search
+const queryParams = new URLSearchParams(queryString)
+const query = queryParams.get('q')
+const url = 'http://localhost:3000/recipes?q=' + query
+const {data, error, isPending} = useFetch(url)
+console.log(query)
+
+
+  return (
+    <div>
+      <h2 className="page-title">
+        Recipies including '{query}'
+      </h2>
+      {error ? <p className="error">{error}</p>:""}
+      {isPending ? <p className="loading">Loading...</p>:""}
+      {data ? <RecipeList recipes={data}/>:"no data to fetch"}
+    </div>
+  )
+}
