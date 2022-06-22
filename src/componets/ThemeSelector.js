@@ -3,13 +3,13 @@ import { useTheme } from "../hooks/useTheme"
 import modeIcon from "../assets/mode-icon.svg"
 
 export default function ThemeSelector() {
-    const {changeColor, changeMode, mode} = useTheme()
+    const {changeColor, changeMode, mode,setMode,color,setColor} = useTheme()
     const themeColors = ['#58249c','#249c6b','#b70233']
 
     const toogleMode= ()=>{
-        changeMode(mode ==='dark'?'light':'dark')
+        setMode(mode ==='dark'?'light':'dark')
     }
-    console.log(mode)
+    
 
   return (
     <div className="theme-selector">
@@ -25,7 +25,7 @@ export default function ThemeSelector() {
         {themeColors.map((color)=>(
             <div
             key={color}
-            onClick={()=> changeColor(color)}
+            onClick={()=> setColor(color)}
             style={{background: color}}
             />
         ))}
