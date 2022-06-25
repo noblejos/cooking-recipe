@@ -17,7 +17,7 @@ const handleSubmit= (e)=>{
 
   return (
     <div className="searchbar">
-        <form onSubmit={handleSubmit}>
+        <form >
             <label htmlFor="search">Search:</label>
             <input type="text" 
             name="" 
