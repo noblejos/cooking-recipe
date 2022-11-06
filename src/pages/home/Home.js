@@ -12,8 +12,7 @@ export default function Home() {
 
 useEffect(()=>{
   setIspending(true)
-  projectFirestore.collection('recipes').get()
-  .then((snapshot)=>{
+  const unsub  = projectFirestore.collection('recipes').onSnapshot((snapshot)=>{
     if(snapshot.empty){
       setError('No recipies to load')
       setIspending(false)
@@ -25,10 +24,12 @@ useEffect(()=>{
       setData(result)
       setIspending(false)
     }
-  }).catch(err=>{
+  },(err)=>{
     setError(err.message)
     setIspending(false)
   })
+
+  return ()=>  unsub()
 
 },[])
 
